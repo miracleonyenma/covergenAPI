@@ -4,6 +4,7 @@
   "description": "API to generate cover images by screenshoting https://cover-gen.netlify.app",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "nodemon app.js"
   },
   "keywords": [
