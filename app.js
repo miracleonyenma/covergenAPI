@@ -3,6 +3,7 @@ const app = express();
 const dotenv = require("dotenv");
 
 const takeScreenshot = require("./modules/takeScreenshot");
+const uploadScreenshot = require("./modules/uploadScreenshot");
 
 dotenv.config({
 	path: "./.env",
@@ -10,10 +11,10 @@ dotenv.config({
 
 app.use(express.json()); //Used to parse JSON bodies
 app.use(express.urlencoded({ extended: true })); //Parse URL-encoded bodies
-app.use(express.static("public"));
+app.use(express.static("templates")); //Serve static files from the templates directory
 
 app.get("/", (req, res) => {
-	res.send("Hello World!");
+	res.send(require("./templates/index.html"));
 });
 
 app.post("/screenshot/miracleio.me", async (req, res) => {
@@ -22,7 +23,14 @@ app.post("/screenshot/miracleio.me", async (req, res) => {
 	const document = req.body.document;
 
 	try {
-		const screenshot = await takeScreenshot(targetURL, document);
+		let screenshot = await takeScreenshot(targetURL, document);
+		screenshot = await uploadScreenshot(
+			{
+				folder: `miracleio.me/covers/${document.slug}`,
+				public_id: "cover",
+			},
+			screenshot
+		);
 		console.log(screenshot);
 
 		res.status(200).json(screenshot);

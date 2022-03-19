@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "nodemon app.js"
+    "test": "nodemon app.js",
+    "tailwind": "npx tailwindcss -i ./templates/src/css/main.css -o ./templates/assets/css/main.css --watch",
+    "dev": "npm run tailwind && npm run test"
   },
   "keywords": [
     "cover",
@@ -17,9 +19,14 @@
   "license": "ISC",
   "dependencies": {
     "chrome-aws-lambda": "^10.1.0",
+    "cloudinary": "^1.28.1",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "puppeteer": "^13.5.1",
     "puppeteer-core": "^13.5.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.2",
+    "tailwindcss": "^3.0.23"
   }
 }
