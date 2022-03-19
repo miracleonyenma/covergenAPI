@@ -10,6 +10,7 @@ dotenv.config({
 
 app.use(express.json()); //Used to parse JSON bodies
 app.use(express.urlencoded({ extended: true })); //Parse URL-encoded bodies
+app.use(express.static("public"));
 
 app.get("/", (req, res) => {
 	res.send("Hello World!");
@@ -21,9 +22,13 @@ app.post("/screenshot/miracleio.me", async (req, res) => {
 	const document = req.body.document;
 
 	try {
-		console.log(await takeScreenshot(targetURL, document));
+		const screenshot = await takeScreenshot(targetURL, document);
+		console.log(screenshot);
+
+		res.status(200).json(screenshot);
 	} catch (error) {
 		console.log(error);
+		res.status(400).json(error);
 	}
 });
 
