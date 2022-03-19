@@ -1,0 +1,21 @@
+{
+  "name": "covergenapi",
+  "version": "1.0.0",
+  "description": "API to generate cover images by screenshoting https://cover-gen.netlify.app",
+  "main": "app.js",
+  "scripts": {
+    "test": "nodemon app.js"
+  },
+  "keywords": [
+    "cover",
+    "generator",
+    "covergen",
+    "puppeteer"
+  ],
+  "author": "Miracle Onyenma",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3"
+  }
+}
