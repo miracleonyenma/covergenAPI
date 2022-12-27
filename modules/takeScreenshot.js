@@ -2,25 +2,7 @@ const fs = require("fs");
 const chromium = require("chrome-aws-lambda");
 const puppeteer = require("puppeteer");
 
-const covers = require("../data/miracleio/covers.json")
-
 module.exports = async (targetURL, document) => {
-	// read json file
-	fs.readFile("../data/miracleio/covers.json", "utf-8", (err, jsonData) => {
-		if (err) {
-			console.log({ err });
-			return
-		}
-		console.log({ fileData: jsonData });
-
-		// parse json
-		try {
-			const covers = JSON.parse(jsonData);
-			console.log({ covers });
-		} catch (error) {
-			console.log({ error });
-		}
-	})
 
 	// launch browser
 	const browser = await puppeteer.launch({
